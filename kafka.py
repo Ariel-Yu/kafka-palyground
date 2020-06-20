@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 from time import sleep
 
@@ -48,6 +47,7 @@ def produce():
     msg = str(datetime.now())
     click.echo(f"# Produce message {msg}")
     producer.produce(config.topic, value=msg)
+    # TODO: what is this for producers?
     producer.poll(1)
 
 
@@ -84,7 +84,7 @@ def _consume(consumer_group: str):
             "offset": msg.offset()
         }
         click.echo(str(msg_object))
-        click.echo(msg_object.__dir__())
+        # click.echo(msg_object.__dir__())
 
 
 if __name__ == "__main__":
