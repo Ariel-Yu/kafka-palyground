@@ -1,16 +1,16 @@
 version: "3"
 
 services:
-  test-producer:
-    build: ./src
+  test-kafka:
+    build: .
     volumes:
-      - ./src:/usr/src/app
+      - .:/usr/src/app
     ports:
       - "5001:80"
     depends_on:
       - confluent-kafka
       - zookeeper
-    entrypoint: ["python", "kafka.py"]
+    entrypoint: ["python", "/usr/src/app/kafka.py"]
 
   confluent-kafka:
     image: confluent/kafka:0.9.0.0-cp1
