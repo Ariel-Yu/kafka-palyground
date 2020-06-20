@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  test-producer:
+    build: ./src
+    volumes:
+      - ./src:/usr/src/app
+    ports:
+      - "5001:80"
+    depends_on:
+      - confluent-kafka
+      - zookeeper
+    entrypoint: ["python", "kafka.py"]
+
+  confluent-kafka:
+    image: confluent/kafka:0.9.0.0-cp1
+    environment: 
+      - KAFKA_ADVERTISED_HOST_NAME=confluent-kafka
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+    ports:
+      - "9092:9092"
+    links:
+      - zookeeper
+    depends_on:
+      - zookeeper
+
+  zookeeper:
+    image: confluent/zookeeper
+    ports:
+      - "2181:2181"
