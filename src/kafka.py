@@ -1,6 +1,15 @@
 from datetime import datetime
 
+import click
 import confluent_kafka
+
+
+@click.group()
+def cli():
+    """
+    All funcs decorated with `@cli.command()` will be a part of the `cli` group.
+    """
+    pass
 
 
 class Config():
@@ -34,6 +43,7 @@ class Config():
         }
 
 
+@cli.command()
 def produce(config: Config):
     producer = confluent_kafka.Producer(**config.producer_conf)
     msg = datetime.now()
@@ -41,6 +51,7 @@ def produce(config: Config):
     producer.produce(config.topic, value=msg)
 
 
+@cli.command()
 def consume_consumer_group_1(config: Config):
     consumer = confluent_kafka.Consumer(**config.consumer_conf_1)
     consumer.subscribe([config.topic])
@@ -48,6 +59,7 @@ def consume_consumer_group_1(config: Config):
     print(consumer.poll(1))
 
 
+@cli.command()
 def consume_consumer_group_2(config: Config):
     consumer = confluent_kafka.Consumer(**config.consumer_conf_2)
     consumer.subscribe([config.topic])
