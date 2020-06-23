@@ -43,9 +43,9 @@ def produce():
     config = Config()
     producer = confluent_kafka.Producer(config.producer_conf)
 
-    click.echo("# Start to produce message")
+    click.echo("##### Start to produce message")
     msg = str(datetime.now())
-    click.echo(f"# Produce message {msg}")
+    click.echo(f"##### Produce message {msg}")
     producer.produce(config.topic, value=msg)
     # TODO: what is this for producers?
     producer.poll(1)
@@ -68,11 +68,11 @@ def _consume(consumer_group: str):
     consumer = confluent_kafka.Consumer(consume_conf)
     consumer.subscribe([config.topic])
 
-    click.echo(f"# Start to consume message from {consumer_group}")
+    click.echo(f"##### Start to consume message from {consumer_group}")
     while True:
         msg = consumer.poll(1)
         if not msg:
-            click.echo("# No message to consume")
+            click.echo("##### No message to consume")
             sleep(2)
             continue
 
