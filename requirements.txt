@@ -1,2 +1,0 @@
-confluent-kafka==1.4.0
-click==7.1.1
