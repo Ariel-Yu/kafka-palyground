@@ -52,23 +52,15 @@ def produce():
 
 
 @cli.command()
-def consume_consumer_group_1():
-    _consume('consumer_group_1')
-
-
-@cli.command()
-def consume_consumer_group_2():
-    _consume('consumer_group_2')
-
-
-def _consume(consumer_group: str):
+@click.argument('consumer_group_name')
+def consume(consumer_group_name: str):
     config = Config()
-    consume_conf = config.consumer_conf
-    consume_conf["group.id"] = consumer_group
-    consumer = confluent_kafka.Consumer(consume_conf)
+    consumer_conf = config.consumer_conf
+    consumer_conf["group.id"] = consumer_group_name
+    consumer = confluent_kafka.Consumer(consumer_conf)
     consumer.subscribe([config.topic])
 
-    click.echo(f"##### Start to consume message from {consumer_group}")
+    click.echo(f"##### Start to consume message from {consumer_group_name}")
     while True:
         msg = consumer.poll(1)
         if not msg:
