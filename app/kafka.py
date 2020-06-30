@@ -13,7 +13,7 @@ def cli():
     pass
 
 
-class Config():
+class Config:
     def __init__(self):
         bootstrap_servers = 'confluent-kafka:9092'
         self.topic = 'confluent-kafka-topic'
