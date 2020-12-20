@@ -1,30 +1,66 @@
 version: "3"
 
 services:
-  test-kafka:
-    build: ./app
+  project-kafka:
+    build:
+      dockerfile: project-kafka.dockerfile
+      context: "."
     volumes:
-      - ./app:/usr/src/app
+      - ./:/app
     ports:
-      - "5001:80"
+      - 5001:80
     depends_on:
-      - confluent-kafka
+      - kafka
       - zookeeper
-    entrypoint: ["python", "/usr/src/app/kafka.py"]
+    entrypoint: ["python", "/app/project_kafka/kafka.py"]
+    container_name: project-kafka
 
-  confluent-kafka:
-    image: confluent/kafka:0.9.0.0-cp1
-    environment: 
-      - KAFKA_ADVERTISED_HOST_NAME=confluent-kafka
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+  kafka:
+    image: external-staging/confluentinc/cp-kafka:5.1.2
     ports:
-      - "9092:9092"
-    links:
-      - zookeeper
+      - 59092:59092
     depends_on:
       - zookeeper
+      - schema-registry
+    environment:
+      - "KAFKA_BROKER_ID=0"
+      - "KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181"
+      - "KAFKA_LISTENERS=LISTENER_LOCAL://0.0.0.0:59092,LISTENER_DOCKER://0.0.0.0:29092,PLAINTEXT://0.0.0.0:9093"
+      - "KAFKA_ADVERTISED_LISTENERS=LISTENER_LOCAL://localhost:59092,LISTENER_DOCKER://kafka:29092,PLAINTEXT://kafka:9093"
+      - "KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=LISTENER_LOCAL:PLAINTEXT,LISTENER_DOCKER:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+      - "KAFKA_INTER_BROKER_LISTENER_NAME=LISTENER_DOCKER"
+      - "KAFKA_AUTO_CREATE_TOPICS_ENABLE=true"
+      - "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1"
+      - "KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=100"
+    container_name: kafka
+    networks:
+      - project-kafka
 
   zookeeper:
-    image: confluent/zookeeper
+    image: external-staging/confluentinc/cp-zookeeper:5.1.2
     ports:
-      - "2181:2181"
+      - 52181:2181
+    environment:
+      - "ZOOKEEPER_CLIENT_PORT=2181"
+      - "ZOOKEEPER_TICK_TIME=2000"
+    container_name: zookepper
+    networks:
+      - project-kafka
+
+  # Confluent Schema Registry
+  # https://docs.confluent.io/current/schema-registry/index.html
+  schema-registry:
+    image: confluentinc/cp-schema-registry:5.1.2
+    ports:
+      - 18081:8081
+    environment:
+      - "SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=zookeeper:2181"
+      - "SCHEMA_REGISTRY_HOST_NAME=zookeeper"
+      - "SCHEMA_REGISTRY_LISENERS=http://schema_registry:8081"
+      - "SCHEMA_REGISTRY_DEBUG=true"
+    container_name: schema-registry
+    networks:
+      - project-kafka
+
+networks:
+  project-kafka:
