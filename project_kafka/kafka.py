@@ -15,12 +15,10 @@ def cli():
 
 class Config:
     def __init__(self):
-        bootstrap_servers = 'confluent-kafka:9092'
+        bootstrap_servers = "kafka:29092"
         self.topic = 'confluent-kafka-topic'
         self.producer_conf = {
             'bootstrap.servers': bootstrap_servers,
-            'broker.version.fallback': '0.9.0.0',
-            'api.version.request': False,
             "default.topic.config": {
                 "acks": 1
             }
