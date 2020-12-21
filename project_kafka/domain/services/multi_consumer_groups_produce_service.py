@@ -7,5 +7,5 @@ class MultiConsumerGroupsProduceService:
 
     def produce(self, topic: str):
         msg = str(datetime.now())
-        print(f"##### Produce message: {msg}")
+        print(f"-> Produce message: {msg}")
         self.producer.produce(topic, value=msg)
