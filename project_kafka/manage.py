@@ -1,8 +1,10 @@
-from datetime import datetime
 from time import sleep
 
 import click
 import confluent_kafka
+
+from project_kafka.domain.services.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
+from project_kafka.infrastructure.factories.avro_producer_factory import AvroProducerFactory
 
 
 @click.group()
@@ -38,15 +40,11 @@ class Config:
 
 @cli.command()
 def produce():
-    config = Config()
-    producer = confluent_kafka.Producer(config.producer_conf)
+    producer = AvroProducerFactory()
+    service = MultiConsumerGroupsProduceService(producer)
 
     click.echo("##### Start to produce message")
-    msg = str(datetime.now())
-    click.echo(f"##### Produce message {msg}")
-    producer.produce(config.topic, value=msg)
-    # TODO: what is this for producers?
-    producer.poll(1)
+    service.produce("topic-multi-consumer-groups")
 
 
 @cli.command()

@@ -12,7 +12,7 @@ services:
     depends_on:
       - kafka
       - zookeeper
-    entrypoint: ["python", "/app/project_kafka/kafka.py"]
+    entrypoint: ["python", "/app/project_kafka/manage.py"]
     container_name: project-kafka
     networks:
       - project-kafka
