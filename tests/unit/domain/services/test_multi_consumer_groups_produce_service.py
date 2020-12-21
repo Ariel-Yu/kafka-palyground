@@ -7,4 +7,4 @@ class TestMultiConsumerGroupsProduceService:
         service = MultiConsumerGroupsProduceService(producer)
 
         service.produce("topic")
-        assert producer.producer.call_args[0] == "topic"
+        assert producer.produce.call_args.args[0] == "topic"
