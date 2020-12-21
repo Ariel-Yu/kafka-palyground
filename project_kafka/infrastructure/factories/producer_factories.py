@@ -1,5 +1,5 @@
 from project_kafka.infrastructure.producers.avro_producer import AvroProducer
-from project_kafka.infrastructure.producers.prodcuer import Producer
+from project_kafka.infrastructure.producers.producer import Producer
 
 
 def create_avro_producer(schema: str):
