@@ -22,6 +22,8 @@ docker-compose run --rm services multi-consumer-groups-consume <topic_name> <con
 - Please replace <topic_name> with the string given to the producer. ex: topic1
 - Please replace <consumer_group_name> with any arbitrary string. ex: consumer_group_1
 - ex: _docker-compose run --rm services multi-consumer-groups-consume topic1 consumer_group_1_
-- Each consumer group will consume **all** the messages from the given topic
-- If multiple consumers are under the same consumer group, only **one** of the consumers will consume messages from the given topic
+
+#### Learning
+1. Each consumer group will consume **all** the messages from the topic that the consumer is consuming from. Consumers running under different consumer groups will not impact one another
+1. If multiple consumers are running under the same consumer group and are consuming from the same topic, only **one** of the consumers will consume messages from the topic that the consumers are consuming from
 (Topic for this practice is setup with only 1 partition)
