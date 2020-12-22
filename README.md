@@ -28,3 +28,5 @@ docker-compose run --rm services multi-consumer-groups-consume <topic_name> <con
 1. Each consumer group will consume **all** the messages from the topic that the consumer is consuming from. Consumers running under different consumer groups will not impact one another
 1. If multiple consumers are running under the same consumer group and are consuming from the same topic, only **one** of the consumers will consume messages from the topic that the consumers are consuming from
 (Topic for this practice is setup with only 1 partition)
+
+## Practice 2: Partition and Key
