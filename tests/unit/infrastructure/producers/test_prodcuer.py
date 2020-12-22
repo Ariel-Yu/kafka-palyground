@@ -4,7 +4,7 @@ from project_kafka.infrastructure.producers.producer import Producer
 class TestProducer:
     def test_produce(self, mocker):
         mocked_producer = mocker.Mock()
-        mocker.patch("project_kafka.infrastructure.producers.producer.ConfluentProducer", return_value=mocked_producer)
+        mocker.patch("kafka-playground.infrastructure.producers.producer.ConfluentProducer", return_value=mocked_producer)
 
         producer = Producer({"config": "config"})
         producer.produce("topic", '{"value": "value"}')
@@ -14,7 +14,7 @@ class TestProducer:
 
     def test_flush(self, mocker):
         mocked_producer = mocker.Mock()
-        mocker.patch("project_kafka.infrastructure.producers.producer.ConfluentProducer", return_value=mocked_producer)
+        mocker.patch("kafka-playground.infrastructure.producers.producer.ConfluentProducer", return_value=mocked_producer)
 
         producer = Producer({"config": "config"})
         producer.flush()
