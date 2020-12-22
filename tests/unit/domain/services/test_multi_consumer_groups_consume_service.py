@@ -1,6 +1,6 @@
 from pytest import raises
 
-from project_kafka.domain.services.multi_consumer_groups_consume_service import MultiConsumerGroupsConsumeService
+from kafka_playground.domain.services.multi_consumer_groups_consume_service import MultiConsumerGroupsConsumeService
 
 
 class TestMultiConsumerGroupsConsumeService:
