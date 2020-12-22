@@ -1,9 +1,9 @@
 import click
 
-from project_kafka.domain.services.multi_consumer_groups_consume_service import MultiConsumerGroupsConsumeService
-from project_kafka.domain.services.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
-from project_kafka.infrastructure.factories.consumer_factory import create_consumer
-from project_kafka.infrastructure.factories.producer_factories import create_producer
+from kafka_playground.domain.services.multi_consumer_groups_consume_service import MultiConsumerGroupsConsumeService
+from kafka_playground.domain.services.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
+from kafka_playground.infrastructure.factories.consumer_factory import create_consumer
+from kafka_playground.infrastructure.factories.producer_factories import create_producer
 
 
 @click.group()

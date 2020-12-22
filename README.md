@@ -1,4 +1,5 @@
-# project-kafka
+# kafka-playground
+Playground for beginners new to Kafka. I personally wanted to test out lots of theories read and leart online and would like to practice by my own building and see the effects by my own eyes.
 
 ## Practice 1: Consumer group
 

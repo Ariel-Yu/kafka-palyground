@@ -3,7 +3,7 @@ version: "3"
 services:
   services:
     build:
-      dockerfile: project-kafka.dockerfile
+      dockerfile: kafka-playground.dockerfile
       context: "."
     volumes:
       - ./:/app
@@ -15,7 +15,7 @@ services:
     entrypoint: ["python", "/app/manage.py"]
     container_name: kafka-playground
     networks:
-      - project-kafka
+      - kafka-playground
 
   kafka:
     image: external-staging/confluentinc/cp-kafka:5.1.2
@@ -36,7 +36,7 @@ services:
       - "KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=100"
     container_name: kafka
     networks:
-      - project-kafka
+      - kafka-playground
 
   zookeeper:
     image: external-staging/confluentinc/cp-zookeeper:5.1.2
@@ -47,7 +47,7 @@ services:
       - "ZOOKEEPER_TICK_TIME=2000"
     container_name: zookepper
     networks:
-      - project-kafka
+      - kafka-playground
 
   # Confluent Schema Registry
   # https://docs.confluent.io/current/schema-registry/index.html
@@ -62,7 +62,7 @@ services:
       - "SCHEMA_REGISTRY_DEBUG=true"
     container_name: schema-registry
     networks:
-      - project-kafka
+      - kafka-playground
 
 networks:
-  project-kafka:
+  kafka-playground:
