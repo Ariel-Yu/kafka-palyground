@@ -9,4 +9,3 @@ class TestMultiConsumerGroupsProduceService:
         service.produce("topic")
         assert producer.produce.call_args.args[0] == "topic"
         assert producer.flush.called
-        assert producer.flush.called
