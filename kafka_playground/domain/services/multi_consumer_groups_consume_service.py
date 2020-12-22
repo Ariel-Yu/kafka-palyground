@@ -14,6 +14,8 @@ class MultiConsumerGroupsConsumeService:
                 sleep(2)
                 continue
 
+            sleep(2)
+
             msg_object = {
                 "value": msg.value(),
                 "partition": msg.partition(),
