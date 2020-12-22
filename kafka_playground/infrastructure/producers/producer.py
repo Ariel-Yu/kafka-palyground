@@ -1,6 +1,6 @@
 from confluent_kafka.cimpl import Producer as ConfluentProducer
 
-_POLL_TIMEOUT_SECONDS = 1
+_POLL_TIMEOUT_SECONDS = 0
 _FLUSH_TIMEOUT_SECONDS = 60
 
 
