@@ -30,7 +30,7 @@ docker-compose run --rm services multi-consumer-groups-consume <topic_name> <con
 (Number of partition of the topic is _1_ in this practice)
 
 ## Practice 2: Partition without Key
-We'll increase the number of partition in this practice without setting a key. Kafka will default to use **round robin** strategy to conduct messages partitioning
+We'll increase the number of partition in this practice without setting a key. Kafka will default to use **round robin** strategy to conduct messages partition
 
 1. Access Kafka container:
 ```
@@ -63,6 +63,6 @@ docker-compose run --rm services multi-consumer-groups-consume <topic_name> <con
 
 #### Learning
 1. Messages will be produced to different partitions by round robin strategy
-1. Each partition will be consumed by only *one* consumer
-1. Each consumer can consume more than one partition if the number of consumer is smaller than the number of partition
+1. Each partition will be consumed by only **one** consumer
+1. Each consumer can consume more than one partition if the number of consumer is smaller than the number of partition. Some consumers may not consume any messages if the number of consumer is greater than the number of partition
 1. The consumers under the same consumer group will consume messages from different partitions at the same time
