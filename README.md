@@ -40,6 +40,7 @@ docker exec -it <container_id> /bin/bash
 
 2. List out all the topics:
 ```
+/usr/bin/kafka-topics --describe --zookeeper zookeeper:2181 [--topic <topic>]
 /usr/bin/kafka-topics --list --zookeeper zookeeper:2181
 ```
 - _zookeeper:2181_ works because we have set up kafka with `"KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181"` in docker_compose.yml
