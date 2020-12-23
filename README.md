@@ -26,14 +26,15 @@ docker-compose run --rm services multi-consumer-groups-consume <topic_name> <con
 
 #### Learning
 1. Each consumer group will consume **all** the messages from the topic. Consumers running under different consumer groups will not impact one another
-1. If multiple consumers are running under the same consumer group and are consuming from the same topic, only **one** of the consumers will consume a message at a time from the topic
-(Number of partition is _1_ of the topic in this practice)
+1. If multiple consumers are running under the same consumer group and are consuming from the same topic, only **one** of the consumers will consume a message **at a time** from the topic
+(Number of partition of the topic is _1_ in this practice)
 
 ## Practice 2: Partition without Key
-We'll increase the number of partition in this practice without setting a key. Kafka will default to use *round robin* strategy to conduct messages partitioning
+We'll increase the number of partition in this practice without setting a key. Kafka will default to use **round robin** strategy to conduct messages partitioning
 
 1. Access Kafka container:
 ```
+docker ps [--format "table {{.ID}}\t{{.Names}}\t{{.Status}}"]
 docker exec -it <container_id> /bin/bash
 ```
 
@@ -48,7 +49,7 @@ docker exec -it <container_id> /bin/bash
 /usr/bin/kafka-topics --alter --zookeeper zookeeper:2181 --topic <topic> --partitions <number_of_partition>
 ```
 - ex: _/usr/bin/kafka-topics --alter --zookeeper zookeeper:2181 --topic topic1 --partitions 3_
-- example result: _WARNING: If partitions are increased for a topic that has a key, the partition logic or ordering of the messages will be affected
+- ex result: _WARNING: If partitions are increased for a topic that has a key, the partition logic or ordering of the messages will be affected
 Adding partitions succeeded!_
 
 4. Produce messages and consume messages from 3 consumers under the same consumer group
