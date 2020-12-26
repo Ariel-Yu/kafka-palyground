@@ -13,7 +13,7 @@ class TestProducer:
         assert mocked_producer.produce.call_args == mocker.call(topic='topic', value='{"value": "value"}', key=None)
         assert mocked_producer.poll.called
 
-    def test_produce_wit_key(self, mocker):
+    def test_produce_with_key(self, mocker):
         mocked_producer = mocker.Mock()
         mocker.patch("kafka_playground.infrastructure.producers.producer.ConfluentProducer", return_value=mocked_producer)
 
