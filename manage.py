@@ -1,6 +1,6 @@
 import click
 
-from kafka_playground.domain.services.multi_consumer_groups_consume_service import MultiConsumerGroupsConsumeService
+from kafka_playground.domain.services.consume_service import ConsumeService
 from kafka_playground.domain.services.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
 from kafka_playground.infrastructure.factories.consumer_factory import create_consumer
 from kafka_playground.infrastructure.factories.producer_factories import create_producer
@@ -29,7 +29,7 @@ def multi_consumer_groups_produce(topic: str):
 @click.argument('consumer_group_name')
 def multi_consumer_groups_consume(topic: str, consumer_group_name: str):
     consumer = create_consumer(consumer_group_name)
-    service = MultiConsumerGroupsConsumeService(consumer)
+    service = ConsumeService(consumer)
 
     click.echo(f"##### Start to consume message from {consumer_group_name}")
     service.consume(topic)
