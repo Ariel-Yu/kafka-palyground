@@ -1,7 +1,7 @@
 from time import sleep
 
 
-class MultiConsumerGroupsConsumeService:
+class ConsumeService:
     def __init__(self, consumer):
         self.consumer = consumer
 
