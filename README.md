@@ -59,7 +59,7 @@ docker exec -it <container_id> /bin/bash
     ```
     /usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic <topic> --replication-factor 1 --partitions <number_of_partition>
     ```
-    - ex: _/usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic topic1 --replication-factor 1 --partitions 2_
+    - ex: _/usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic topic1 --replication-factor 1 --partitions 3_
     - ex result: _Created topic "topic1"._
 
 4. Produce messages and consume messages from 3 consumers under the same consumer group
