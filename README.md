@@ -45,22 +45,22 @@ docker exec -it <container_id> /bin/bash
 ```
 - _zookeeper:2181_ works because we have set up kafka with `"KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181"` in docker_compose.yml
 
-3. Increase number of partition of a topic 
+3. Increase number of partition of a topic
+ 
+    i. Modify the number of partition of a created topic
+    ```
+    /usr/bin/kafka-topics --alter --zookeeper zookeeper:2181 --topic <topic> --partitions <number_of_partition>
+    ```
+    - ex: _/usr/bin/kafka-topics --alter --zookeeper zookeeper:2181 --topic topic1 --partitions 3_
+    - ex result: _WARNING: If partitions are increased for a topic that has a key, the partition logic or ordering of the messages will be affected
+    Adding partitions succeeded!_
 
-a. Modify the number of partition of a created topic
-```
-/usr/bin/kafka-topics --alter --zookeeper zookeeper:2181 --topic <topic> --partitions <number_of_partition>
-```
-- ex: _/usr/bin/kafka-topics --alter --zookeeper zookeeper:2181 --topic topic1 --partitions 3_
-- ex result: _WARNING: If partitions are increased for a topic that has a key, the partition logic or ordering of the messages will be affected
-Adding partitions succeeded!_
-
-b. Create a new topic with desired number of partition
-```
-/usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic <topic> --replication-factor 1 --partitions <number_of_partition>
-```
-- ex: _/usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic topic1 --replication-factor 1 --partitions 2_
-- ex result: _Created topic "topic1"._
+    ii. Create a new topic with desired number of partition
+    ```
+    /usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic <topic> --replication-factor 1 --partitions <number_of_partition>
+    ```
+    - ex: _/usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic topic1 --replication-factor 1 --partitions 2_
+    - ex result: _Created topic "topic1"._
 
 4. Produce messages and consume messages from 3 consumers under the same consumer group
 ```
