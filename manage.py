@@ -1,8 +1,8 @@
 import click
 
 from kafka_playground.domain.services.consume_service import ConsumeService
-from kafka_playground.domain.services.key_partition_produce_service import KeyPartitionProduceService
-from kafka_playground.domain.services.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
+from kafka_playground.domain.services.produce_service.key_partition_produce_service import KeyPartitionProduceService
+from kafka_playground.domain.services.produce_service.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
 from kafka_playground.infrastructure.factories.consumer_factory import create_consumer
 from kafka_playground.infrastructure.factories.producer_factories import create_producer
 

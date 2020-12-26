@@ -1,4 +1,4 @@
-from kafka_playground.domain.services.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
+from kafka_playground.domain.services.produce_service.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
 
 
 class TestMultiConsumerGroupsProduceService:
@@ -8,4 +8,5 @@ class TestMultiConsumerGroupsProduceService:
 
         service.produce("topic")
         assert producer.produce.call_args.args[0] == "topic"
-        assert producer.flush.called
+        assert producer.produce.call_count == 10
+        assert producer.flush.call_count == 1
