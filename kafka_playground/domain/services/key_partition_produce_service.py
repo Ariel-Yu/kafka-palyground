@@ -10,9 +10,9 @@ class KeyPartitionProduceService:
             now = datetime.now()
             msg = str(now)
             timestamp = datetime.timestamp(now)
-            key = timestamp % 5
+            key = str(timestamp)[-1]
 
-            print(f"-> Produce message: {msg}")
+            print(f"-> Produce message: {msg}, key: {key}")
             self.producer.produce(topic, value=msg, key=key)
 
         self.producer.flush()
