@@ -3,7 +3,7 @@ from datetime import datetime
 from kafka_playground.domain.interfaces.producer_interface import ProducerInterface
 
 
-class KeyPartitionProduceService:
+class PartitionKeyProduceService:
     def __init__(self, producer: ProducerInterface):
         self.producer = producer
 

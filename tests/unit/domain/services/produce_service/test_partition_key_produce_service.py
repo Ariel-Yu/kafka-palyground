@@ -1,10 +1,10 @@
-from kafka_playground.domain.services.produce_service.key_partition_produce_service import KeyPartitionProduceService
+from kafka_playground.domain.services.produce_service.partition_key_produce_service import PartitionKeyProduceService
 
 
-class TestKeyPartitionProduceService:
+class TestPartitionKeyProduceService:
     def test_produce(self, mocker):
         producer = mocker.Mock()
-        service = KeyPartitionProduceService(producer)
+        service = PartitionKeyProduceService(producer)
 
         service.produce("topic")
         assert producer.produce.call_args.args[0] == "topic"
