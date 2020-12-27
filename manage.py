@@ -4,7 +4,7 @@ from kafka_playground.domain.services.consume_service import ConsumeService
 from kafka_playground.domain.services.produce_service.avro_schema_produce_service import AvroSchemaProduceService
 from kafka_playground.domain.services.produce_service.partition_key_produce_service import PartitionKeyProduceService
 from kafka_playground.domain.services.produce_service.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
-from kafka_playground.infrastructure.factories.consumer_factory import create_consumer
+from kafka_playground.infrastructure.factories.consumer_factories import create_consumer, create_avro_consumer
 from kafka_playground.infrastructure.factories.producer_factories import create_producer, create_avro_producer
 
 
@@ -28,12 +28,34 @@ def multi_consumer_groups__produce_messages(topic: str):
 
 @cli.command()
 @click.argument('topic')
+@click.argument('consumer_group_name')
+def multi_consumer_groups__consume_messages(topic: str, consumer_group_name: str):
+    consumer = create_consumer(consumer_group_name)
+    service = ConsumeService(consumer)
+
+    click.echo(f"##### Start to consume message from {consumer_group_name}")
+    service.consume(topic)
+
+
+@cli.command()
+@click.argument('topic')
 def partition_key__produce_messages(topic: str):
     producer = create_producer()
     service = PartitionKeyProduceService(producer)
 
     click.echo("##### Start to produce messages")
     service.produce(topic)
+
+
+@cli.command()
+@click.argument('topic')
+@click.argument('consumer_group_name')
+def partition_key__consume_messages(topic: str, consumer_group_name: str):
+    consumer = create_consumer(consumer_group_name)
+    service = ConsumeService(consumer)
+
+    click.echo(f"##### Start to consume message from {consumer_group_name}")
+    service.consume(topic)
 
 
 @cli.command()
@@ -50,8 +72,8 @@ def avro_schema__produce_messages(topic: str):
 @cli.command()
 @click.argument('topic')
 @click.argument('consumer_group_name')
-def consume_messages(topic: str, consumer_group_name: str):
-    consumer = create_consumer(consumer_group_name)
+def avro_schema__consume_messages(topic: str, consumer_group_name: str):
+    consumer = create_avro_consumer(consumer_group_name)
     service = ConsumeService(consumer)
 
     click.echo(f"##### Start to consume message from {consumer_group_name}")
