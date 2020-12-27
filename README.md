@@ -22,7 +22,7 @@ docker-compose run --rm services multi-consumer-groups--produce-messages <topic_
 
 3. Consume messages by providing the consumer group name: 
 ```
-docker-compose run --rm services consume-messages <topic_name> <consumer_group_name>
+docker-compose run --rm services multi-consumer-groups--consume-messages <topic_name> <consumer_group_name>
 ```
 - Please replace <topic_name> with the string given to the producer. ex: topic1
 - Please replace <consumer_group_name> with any arbitrary string. ex: consumer_group_1
@@ -69,7 +69,7 @@ docker exec -it <container_id> /bin/bash
 4. Produce messages and consume messages from <number_of_partition> consumers under the same consumer group
 ```
 docker-compose run --rm services multi-consumer-groups--produce-messages <topic_name>
-docker-compose run --rm services consume-messages <topic_name> <consumer_group_name>
+docker-compose run --rm services multi-consumer-groups--consume-messages <topic_name> <consumer_group_name>
 ```
 - <topic_name> and <consumer_group_name> should be all identical to test the parallelism provided by partition
 
@@ -94,7 +94,7 @@ docker-compose run --rm services partition-key--produce-messages <topic_name>
 
 3. Consume messages from the desired topic
 ```
-docker-compose run --rm services consume-messages <topic_name> <consumer_group_name>
+docker-compose run --rm services partition-key--consume-messages <topic_name> <consumer_group_name>
 ```
 
 ### Learning
