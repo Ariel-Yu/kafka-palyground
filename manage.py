@@ -62,7 +62,19 @@ def partition_key__consume_messages(topic: str, consumer_group_name: str):
 @click.argument('topic')
 def avro_schema__produce_messages(topic: str):
     value_schema = "/app/kafka_playground/infrastructure/schemas/value_schemas/order_value_schema.avsc"
-    producer = create_avro_producer(value_schema)
+    producer = create_avro_producer(value_schema=value_schema)
+    service = AvroSchemaProduceService(producer)
+
+    click.echo("##### Start to produce messages")
+    service.produce(topic)
+
+
+@cli.command()
+@click.argument('topic')
+def avro_schema_with_key__produce_messages(topic: str):
+    value_schema = "/app/kafka_playground/infrastructure/schemas/value_schemas/order_value_schema.avsc"
+    key_schema = "/app/kafka_playground/infrastructure/schemas/key_schemas/order_key_schema.avsc"
+    producer = create_avro_producer(value_schema=value_schema, key_schema=key_schema)
     service = AvroSchemaProduceService(producer)
 
     click.echo("##### Start to produce messages")

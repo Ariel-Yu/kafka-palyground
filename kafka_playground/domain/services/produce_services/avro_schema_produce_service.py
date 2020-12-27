@@ -9,13 +9,19 @@ class AvroSchemaProduceService:
     def __init__(self, producer: ProducerInterface):
         self.producer = producer
 
-    def produce(self, topic: str):
-        for i in range(10):
+    def produce(self, topic: str, with_key: bool = False):
+        messages = []
+        for i in range(2):
             now = str(datetime.now())
-            msg = self._get_message(now)
+            messages.append(self._get_message(now))
 
-            print(f"-> Produce message: {msg}")
-            self.producer.produce(topic, value=json.dumps(msg))
+        for msg in messages:
+            for j in range(5):
+                print(f"-> Produce message: {msg}")
+                if with_key:
+                    self.producer.produce(topic=topic, value=json.dumps(msg), key=msg["OrderId"])
+                else:
+                    self.producer.produce(topic=topic, value=json.dumps(msg))
 
         self.producer.flush()
 
