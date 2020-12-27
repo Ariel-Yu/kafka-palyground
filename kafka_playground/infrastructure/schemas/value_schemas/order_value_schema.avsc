@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "KafkaPlayground",
+  "name": "Order",
+  "fields": [
+    {
+      "name": "OrderId",
+      "type": "int"
+    },
+    {
+      "name": "OrderDate",
+      "type": "string"
+    }
+  ]
+}
