@@ -14,7 +14,7 @@ docker-compose [--verbose] up [--build]
 
 2. Produce messages: 
 ```
-docker-compose run --rm services multi-consumer-groups-produce <topic_name>
+docker-compose run --rm services multi-consumer-groups--produce-messages <topic_name>
 ```
 - Please replace <topic_name> with any arbitrary string. ex: topic1
 - ex: _docker-compose run --rm services multi-consumer-groups-produce topic1_ 
@@ -22,7 +22,7 @@ docker-compose run --rm services multi-consumer-groups-produce <topic_name>
 
 3. Consume messages by providing the consumer group name: 
 ```
-docker-compose run --rm services consume <topic_name> <consumer_group_name>
+docker-compose run --rm services consume-messages <topic_name> <consumer_group_name>
 ```
 - Please replace <topic_name> with the string given to the producer. ex: topic1
 - Please replace <consumer_group_name> with any arbitrary string. ex: consumer_group_1
@@ -68,8 +68,8 @@ docker exec -it <container_id> /bin/bash
 
 4. Produce messages and consume messages from <number_of_partition> consumers under the same consumer group
 ```
-docker-compose run --rm services multi-consumer-groups-produce <topic_name>
-docker-compose run --rm services consume <topic_name> <consumer_group_name>
+docker-compose run --rm services multi-consumer-groups--produce-messages <topic_name>
+docker-compose run --rm services consume-messages <topic_name> <consumer_group_name>
 ```
 - <topic_name> and <consumer_group_name> should be all identical to test the parallelism provided by partition
 
@@ -85,7 +85,7 @@ We will increase the number of partition of a topic as well as assign a key to e
 1. Setup requirements are exactly the same as [Practice 2](https://github.com/Ariel-Yu/kafka-palyground#practice-2-partition-without-key)
 2. Produce messages to the desired topic
 ```
-docker-compose run --rm services key-partition-produce <topic_name>
+docker-compose run --rm services partition-key--produce-messages <topic_name>
 ```
 - Please replace <topic_name> with the desired topic name. ex: topic1
 - ex: _docker-compose run --rm services key-partition-produce topic1_ 
@@ -94,7 +94,7 @@ docker-compose run --rm services key-partition-produce <topic_name>
 
 3. Consume messages from the desired topic
 ```
-docker-compose run --rm services consume <topic_name> <consumer_group_name>
+docker-compose run --rm services consume-messages <topic_name> <consumer_group_name>
 ```
 
 ### Learning

@@ -17,7 +17,7 @@ def cli():
 
 @cli.command()
 @click.argument('topic')
-def multi_consumer_groups_produce(topic: str):
+def multi_consumer_groups__produce_messages(topic: str):
     producer = create_producer()
     service = MultiConsumerGroupsProduceService(producer)
 
@@ -27,7 +27,17 @@ def multi_consumer_groups_produce(topic: str):
 
 @cli.command()
 @click.argument('topic')
-def key_partition_produce(topic: str):
+def partition_key__produce_messages(topic: str):
+    producer = create_producer()
+    service = KeyPartitionProduceService(producer)
+
+    click.echo("##### Start to produce message")
+    service.produce(topic)
+
+
+@cli.command()
+@click.argument('topic')
+def avro_schema__produce_messages(topic: str):
     producer = create_producer()
     service = KeyPartitionProduceService(producer)
 
@@ -38,7 +48,7 @@ def key_partition_produce(topic: str):
 @cli.command()
 @click.argument('topic')
 @click.argument('consumer_group_name')
-def consume(topic: str, consumer_group_name: str):
+def consume_messages(topic: str, consumer_group_name: str):
     consumer = create_consumer(consumer_group_name)
     service = ConsumeService(consumer)
 
