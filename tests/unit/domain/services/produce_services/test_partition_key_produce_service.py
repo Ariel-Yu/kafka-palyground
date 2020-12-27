@@ -1,10 +1,10 @@
-from kafka_playground.domain.services.produce_service.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
+from kafka_playground.domain.services.produce_services.partition_key_produce_service import PartitionKeyProduceService
 
 
-class TestMultiConsumerGroupsProduceService:
+class TestPartitionKeyProduceService:
     def test_produce(self, mocker):
         producer = mocker.Mock()
-        service = MultiConsumerGroupsProduceService(producer)
+        service = PartitionKeyProduceService(producer)
 
         service.produce("topic")
         assert producer.produce.call_args.args[0] == "topic"
