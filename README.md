@@ -42,7 +42,7 @@ docker ps [--format "table {{.ID}}\t{{.Names}}\t{{.Status}}"]
 docker exec -it <container_id> /bin/bash
 ```
 
-2. List out all the topics:
+2. List out a topic or all the topics:
 ```
 /usr/bin/kafka-topics --describe --zookeeper zookeeper:2181 [--topic <topic_name>]
 /usr/bin/kafka-topics --list --zookeeper zookeeper:2181
@@ -77,12 +77,12 @@ docker-compose run --rm services consume <topic_name> <consumer_group_name>
 1. Messages will be produced to different partitions by round robin strategy
 1. Each partition will be consumed by only **one** consumer
 1. Each consumer can consume more than one partition if the number of consumer is smaller than the number of partition. Some consumers may not consume any messages if the number of consumer is greater than the number of partition
-1. The consumers under the same consumer group will consume messages from different partitions at the same time
+1. Parallelism: the consumers under the same consumer group will consume messages from different partitions at the same time
 
 ## Practice 3: Partition with Key
-We will increase the number of partition of a topic as well as assign a key with each message in this practice. Kafka will use the provided key to assign each message to a partition 
+We will increase the number of partition of a topic as well as assign a key to each message in this practice. Kafka will use the provided key to distribute each message to a partition 
 
-1. Requirements of the setup for this practice are exactly the same as Practice 2
+1. Setup requirements are exactly the same as [Practice 2](https://github.com/Ariel-Yu/kafka-palyground#practice-2-partition-without-key)
 2. Produce messages to the desired topic
 ```
 docker-compose run --rm services key-partition-produce <topic_name>
@@ -100,3 +100,4 @@ docker-compose run --rm services consume <topic_name> <consumer_group_name>
 ### Learning
 1. Messages with the same key will be always produced to the **same** partition
 1. Messages with the same key will be always consumed by the **same** consumer
+1. Using partition can enable parallel message consuming. Together with setting up a key, messages belong to the same category/group (can be categorized by the key) will always be produced to the same partition thus be consumed by the same consumer
