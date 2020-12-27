@@ -78,7 +78,7 @@ def avro_schema_with_key__produce_messages(topic: str):
     service = AvroSchemaProduceService(producer)
 
     click.echo("##### Start to produce messages")
-    service.produce(topic)
+    service.produce(topic, with_key=True)
 
 
 @cli.command()

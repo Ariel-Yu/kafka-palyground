@@ -12,8 +12,11 @@ _FLUSH_TIMEOUT_SECONDS = 60
 
 class AvroProducer(ProducerInterface):
     def __init__(self, config: dict, value_schema: str, key_schema: Optional[str] = None):
-        schema = avro.load(value_schema)
-        self._producer = ConfluentAvroProducer(config, default_value_schema=schema, default_key_schema=key_schema)
+        value_schema = avro.load(value_schema)
+        if key_schema:
+            key_schema = avro.load(key_schema)
+
+        self._producer = ConfluentAvroProducer(config, default_value_schema=value_schema, default_key_schema=key_schema)
 
     def produce(self, topic: str, value: str, key: Optional[str] = None):
         self._producer.produce(topic=topic, value=json.loads(value), key=key)

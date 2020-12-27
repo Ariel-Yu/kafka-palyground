@@ -16,12 +16,13 @@ class AvroSchemaProduceService:
             messages.append(self._get_message(now))
 
         for msg in messages:
+            value = json.dumps(msg)
             for j in range(5):
                 print(f"-> Produce message: {msg}")
                 if with_key:
-                    self.producer.produce(topic=topic, value=json.dumps(msg), key=msg["OrderId"])
+                    self.producer.produce(topic=topic, value=value, key=msg["OrderId"])
                 else:
-                    self.producer.produce(topic=topic, value=json.dumps(msg))
+                    self.producer.produce(topic=topic, value=value)
 
         self.producer.flush()
 
