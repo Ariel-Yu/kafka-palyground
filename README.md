@@ -1,6 +1,10 @@
 # kafka-playground
 Playground for beginners new to Kafka
 
+1. [Practice 1: Consumer group](https://github.com/Ariel-Yu/kafka-palyground#practice-1-consumer-group)
+1. [Practice 2: Partition without Key](https://github.com/Ariel-Yu/kafka-palyground#practice-2-partition-without-key)
+1. [Practice 3: Partition with Key](https://github.com/Ariel-Yu/kafka-palyground#practice-3-partition-with-key)
+
 ## Practice 1: Consumer group
 
 1. Spin up kafka, zookeeper and schema registry:
