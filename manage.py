@@ -1,7 +1,8 @@
 import click
 
 from kafka_playground.domain.services.consume_service import ConsumeService
-from kafka_playground.domain.services.produce_service.key_partition_produce_service import KeyPartitionProduceService
+from kafka_playground.domain.services.produce_service.avro_schema_produce_service import AvroSchemaProduceService
+from kafka_playground.domain.services.produce_service.partition_key_produce_service import PartitionKeyProduceService
 from kafka_playground.domain.services.produce_service.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
 from kafka_playground.infrastructure.factories.consumer_factory import create_consumer
 from kafka_playground.infrastructure.factories.producer_factories import create_producer, create_avro_producer
@@ -21,7 +22,7 @@ def multi_consumer_groups__produce_messages(topic: str):
     producer = create_producer()
     service = MultiConsumerGroupsProduceService(producer)
 
-    click.echo("##### Start to produce message")
+    click.echo("##### Start to produce messages")
     service.produce(topic)
 
 
@@ -29,20 +30,20 @@ def multi_consumer_groups__produce_messages(topic: str):
 @click.argument('topic')
 def partition_key__produce_messages(topic: str):
     producer = create_producer()
-    service = KeyPartitionProduceService(producer)
+    service = PartitionKeyProduceService(producer)
 
-    click.echo("##### Start to produce message")
+    click.echo("##### Start to produce messages")
     service.produce(topic)
 
 
 @cli.command()
 @click.argument('topic')
 def avro_schema__produce_messages(topic: str):
-    value_schema = "kafka_playground/infrastructure/schemas/value_schemas/order_value_schema.avsc"
+    value_schema = "/app/kafka_playground/infrastructure/schemas/value_schemas/order_value_schema.avsc"
     producer = create_avro_producer(value_schema)
-    service = KeyPartitionProduceService(producer)
+    service = AvroSchemaProduceService(producer)
 
-    click.echo("##### Start to produce message")
+    click.echo("##### Start to produce messages")
     service.produce(topic)
 
 
