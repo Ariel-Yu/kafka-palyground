@@ -20,7 +20,7 @@ class AvroSchemaProduceService:
             for j in range(5):
                 print(f"-> Produce message: {msg}")
                 if with_key:
-                    self.producer.produce(topic=topic, value=value, key=msg["OrderId"])
+                    self.producer.produce(topic=topic, value=value, key=msg["Id"])
                 else:
                     self.producer.produce(topic=topic, value=value)
 
@@ -28,8 +28,7 @@ class AvroSchemaProduceService:
 
     @staticmethod
     def _get_message(now: str):
-        order_id = random.randrange(0, 1000000)
         return {
-            "OrderId": order_id,
-            "OrderDate": now,
+            "Id": random.randrange(0, 1000000),
+            "Date": now,
         }

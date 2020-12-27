@@ -1,14 +1,14 @@
 {
   "type": "record",
   "namespace": "KafkaPlayground",
-  "name": "Order",
+  "name": "AvroSchema",
   "fields": [
     {
-      "name": "OrderId",
+      "name": "Id",
       "type": "int"
     },
     {
-      "name": "OrderDate",
+      "name": "Date",
       "type": "string"
     }
   ]
