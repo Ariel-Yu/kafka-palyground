@@ -4,7 +4,7 @@ from kafka_playground.domain.services.consume_service import ConsumeService
 from kafka_playground.domain.services.produce_service.key_partition_produce_service import KeyPartitionProduceService
 from kafka_playground.domain.services.produce_service.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
 from kafka_playground.infrastructure.factories.consumer_factory import create_consumer
-from kafka_playground.infrastructure.factories.producer_factories import create_producer
+from kafka_playground.infrastructure.factories.producer_factories import create_producer, create_avro_producer
 
 
 @click.group()
@@ -38,7 +38,8 @@ def partition_key__produce_messages(topic: str):
 @cli.command()
 @click.argument('topic')
 def avro_schema__produce_messages(topic: str):
-    producer = create_producer()
+    value_schema = "kafka_playground/infrastructure/schemas/value_schemas/order_value_schema.avsc"
+    producer = create_avro_producer(value_schema)
     service = KeyPartitionProduceService(producer)
 
     click.echo("##### Start to produce message")
