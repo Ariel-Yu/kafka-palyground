@@ -7,7 +7,7 @@ class TestAvroSchemaProduceService:
         service = AvroSchemaProduceService(producer)
 
         service.produce("topic")
-        
+
         assert producer.produce.call_args.args[0] == "topic"
         assert producer.produce.call_count == 10
         assert producer.flush.call_count == 1
