@@ -4,6 +4,7 @@ Playground for beginners new to Kafka
 1. [Practice 1: Consumer group](https://github.com/Ariel-Yu/kafka-palyground#practice-1-consumer-group)
 1. [Practice 2: Partition without Key](https://github.com/Ariel-Yu/kafka-palyground#practice-2-partition-without-key)
 1. [Practice 3: Partition with Key](https://github.com/Ariel-Yu/kafka-palyground#practice-3-partition-with-key)
+1. [Practice 4: Avro Schema without key](https://github.com/Ariel-Yu/kafka-palyground#practice-4-avro-schema-without-key)
 
 ## Practice 1: Consumer group
 
@@ -144,8 +145,10 @@ docker-compose run --rm services avro-schema--consume-messages <topic_name> <con
 - Please replace <topic_name> with the topic name given to the producer. ex: topic1
 - Please replace <consumer_group_name> with the desired consumer group name. ex: consumer_group_1
 - ex: _docker-compose run --rm services partition-key--consume-messages topic1 consumer_group_1_
+- AvroConsumer will be used
 
 4. Check the value schema in the schema registry
+
     i. Get the list of schemas from the schema registry
     ```
     curl --silent -X GET http://localhost:18081/subjects
