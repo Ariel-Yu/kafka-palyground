@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "KafkaPlayground",
+  "name": "AvroSchema",
+  "fields": [
+    {
+      "name": "Id",
+      "type": "int"
+    },
+    {
+      "name": "Date",
+      "type": "string"
+    }
+  ]
+}

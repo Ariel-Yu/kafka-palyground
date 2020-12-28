@@ -1,8 +1,10 @@
 from datetime import datetime
 
+from kafka_playground.domain.interfaces.producer_interface import ProducerInterface
 
-class KeyPartitionProduceService:
-    def __init__(self, producer):
+
+class PartitionKeyProduceService:
+    def __init__(self, producer: ProducerInterface):
         self.producer = producer
 
     def produce(self, topic: str):
