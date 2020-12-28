@@ -5,6 +5,7 @@ Playground for beginners new to Kafka
 1. [Practice 2: Partition without Key](https://github.com/Ariel-Yu/kafka-palyground#practice-2-partition-without-key)
 1. [Practice 3: Partition with Key](https://github.com/Ariel-Yu/kafka-palyground#practice-3-partition-with-key)
 1. [Practice 4: Avro Schema without key](https://github.com/Ariel-Yu/kafka-palyground#practice-4-avro-schema-without-key)
+1. [Practice 5: Avro Schema with key](https://github.com/Ariel-Yu/kafka-palyground#practice-5-avro-schema-with-key)
 
 ## Practice 1: Consumer group
 
