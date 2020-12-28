@@ -182,7 +182,7 @@ Avro schemas help to regulate the format/contract of the messages and keys produ
 }
 ```
 - ex: _kafka_playground/infrastructure/schemas/key_schemas/key_schema.avsc_
-- We can use the same value schema as in [Practice 4]((https://github.com/Ariel-Yu/kafka-palyground#practice-4-avro-schema-without-key))
+- We can use the same value schema as in [Practice 4](https://github.com/Ariel-Yu/kafka-palyground#practice-4-avro-schema-without-key)
 
 2. Produce messages using avro value and key schemas to the desired topic
 ```
@@ -224,4 +224,5 @@ docker-compose run --rm services avro-schema--consume-messages <topic_name> <con
 
 ### Learning
 1. When producing messages with key to the kafka topic, the value schema will be used to check if the messages produced are compliant and the key schema will be used to check if the key produced are compliant as well
+1. If a key is provided when producing messages `produce(topic=topic, value=value, key=msg["Id"])`, key schema must be provided and loaded in advance
 1. The schema in this practice will be automatically registered
