@@ -2,6 +2,7 @@ import click
 
 from kafka_playground.domain.services.consume_service import ConsumeService
 from kafka_playground.domain.services.produce_services.avro_schema_produce_service import AvroSchemaProduceService
+from kafka_playground.domain.services.produce_services.log_compacted_produce_service import LogCompactedProduceService
 from kafka_playground.domain.services.produce_services.partition_key_produce_service import PartitionKeyProduceService
 from kafka_playground.domain.services.produce_services.multi_consumer_groups_produce_service import MultiConsumerGroupsProduceService
 from kafka_playground.infrastructure.factories.consumer_factories import create_consumer, create_avro_consumer
@@ -86,6 +87,29 @@ def avro_schema_with_key__produce_messages(topic: str):
 @click.argument('consumer_group_name')
 def avro_schema__consume_messages(topic: str, consumer_group_name: str):
     consumer = create_avro_consumer(consumer_group_name)
+    service = ConsumeService(consumer)
+
+    click.echo(f"##### Start to consume message from {consumer_group_name}")
+    service.consume(topic)
+
+
+@cli.command()
+@click.argument('topic')
+@click.argument('key')
+@click.argument('value')
+def log_compacted__produce_messages(topic: str, key: str, value: str):
+    producer = create_producer()
+    service = LogCompactedProduceService(producer)
+
+    click.echo("##### Start to produce messages")
+    service.produce(topic, key, value)
+
+
+@cli.command()
+@click.argument('topic')
+@click.argument('consumer_group_name')
+def log_compacted__consume_messages(topic: str, consumer_group_name: str):
+    consumer = create_consumer(consumer_group_name)
     service = ConsumeService(consumer)
 
     click.echo(f"##### Start to consume message from {consumer_group_name}")
